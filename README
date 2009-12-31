@@ -1,0 +1,38 @@
+sxpath is a Shitty Xpath alike for embedded systems or, more widely, for
+any UNIX-like systems. It compiles under Cygwin too.
+
+Originally written for execution on the Popcorn Hour, where it was
+impractical to acquire lots of dependencies for proper XML parsing, this is
+a hack to bring easy scraping to embedded systems.
+
+The general idea is to provide a "path" like /xml/foo/bar which, given input
+such as:
+<xml>
+        <foo>
+                <bar>1</bar>
+                <bar>2</bar>
+        </foo>
+        <foo>
+                <bar>3</bar>
+                <bar>4</bar>
+        </foo>
+</xml>
+
+would give output of:
+/xml/foo/bar: 1
+/xml/foo/bar: 2
+/xml/foo/bar: 3
+/xml/foo/bar: 4
+
+i.e. easily parseable line-based output for the UNIX swiss-army-knife
+utility collection, e.g. awk, grep, sed, etc.
+
+Actually, the largest and messiest part of the code is dedicated to HTML
+scraping ("lax" mode) to make it possible to write applications around
+scraping content from the web.
+
+To compile;
+
+gcc -Wall -Os -o sxpath sxpath.c
+
+For runtime help just execute the program with parameters.
